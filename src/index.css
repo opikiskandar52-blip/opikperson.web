@@ -1,113 +1,396 @@
-html {
-  scroll-behavior: smooth;
-
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
-
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
-
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
-  color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
-  @media (max-width: 1024px) {
-    font-size: 16px;
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
-  }
-
-  #social .button-icon {
-    filter: invert(1) brightness(2);
-  }
-}
-
-body {
+/* RESET & VARIABLE STYLES */
+* {
   margin: 0;
-}
-
-#root {
-  width: 1126px;
-  max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  border-inline: 1px solid var(--border);
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
+  padding: 0;
   box-sizing: border-box;
 }
 
-h1,
-h2 {
-  font-family: var(--heading);
-  font-weight: 500;
-  color: var(--text-h);
+:root {
+  --bg-color: #0b0c10;
+  --primary-neon: #ff0055; /* Hot Pink */
+  --secondary-neon: #00ffff; /* Cyan */
+  --text-color: #ffffff;
+  --card-bg: #1f2833;
 }
 
-h1 {
-  font-size: 56px;
-  letter-spacing: -1.68px;
-  margin: 32px 0;
-  @media (max-width: 1024px) {
-    font-size: 36px;
-    margin: 20px 0;
-  }
-}
-h2 {
-  font-size: 24px;
-  line-height: 118%;
-  letter-spacing: -0.24px;
-  margin: 0 0 8px;
-  @media (max-width: 1024px) {
-    font-size: 20px;
-  }
-}
-p {
-  margin: 0;
+/* Import Font Keren dari Google Fonts langsung di CSS */
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Russo+One&family=Ubuntu:wght@400;700&display=swap');
+
+body {
+  font-family: 'Ubuntu', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  overflow-x: hidden;
 }
 
-code,
-.counter {
-  font-family: var(--mono);
-  display: inline-flex;
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* BACKGROUND PATTERN GRUNGE */
+.bg-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(rgba(11, 12, 16, 0.85), rgba(11, 12, 16, 0.95)), 
+              url('https://www.transparenttextures.com/patterns/black-paper.png');
+  z-index: -1;
+}
+
+/* HEADER & NAVIGATION */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 50px;
+  background: rgba(31, 40, 51, 0.7);
+  border-bottom: 3px solid var(--primary-neon);
+  backdrop-filter: blur(10px);
+}
+
+.logo h1 {
+  font-family: 'Russo One', sans-serif;
+  letter-spacing: 2px;
+}
+
+.logo h1 span {
+  color: var(--primary-neon);
+  text-shadow: 0 0 10px var(--primary-neon);
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+}
+
+nav ul li {
+  margin-left: 15px;
+}
+
+/* Navigasi Menggunakan Button khusus React */
+body, html {
+  overflow-x: hidden;
+  height: 100%;
+  width: 100%;
+  background: #030305;
+}
+
+/* MAIN CONTAINER SPACE */
+.content-container {
+  flex: 1;
+  padding: 40px 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.page {
+  width: 100%;
+  max-width: 900px;
+  animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* TITLE COMPONENT */
+.section-title {
+  font-family: 'Permanent Marker', cursive;
+  font-size: 3.5rem;
+  color: var(--secondary-neon);
+  text-shadow: 3px 3px 0px var(--primary-neon);
+  margin-bottom: 30px;
+  text-transform: uppercase;
+}
+
+/* HERO SECTION (HOME) */
+.hero-text {
+  text-align: center;
+}
+
+.glitch {
+  font-family: 'Permanent Marker', cursive;
+  font-size: 4.5rem;
+  color: var(--text-color);
+  text-shadow: 5px 5px var(--primary-neon);
+  margin-bottom: 20px;
+}
+
+.hero-text p {
+  font-size: 1.2rem;
+  max-width: 650px;
+  margin: 0 auto 30px auto;
+  line-height: 1.6;
+}
+
+.btn-cta {
+  font-family: 'Russo One', sans-serif;
+  padding: 15px 35px;
+  font-size: 1.2rem;
+  background: transparent;
+  color: var(--secondary-neon);
+  border: 3px solid var(--secondary-neon);
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: 0.3s;
+}
+
+.btn-cta:hover {
+  background: var(--secondary-neon);
+  color: #000;
+  box-shadow: 0 0 25px var(--secondary-neon);
+  transform: scale(1.05) rotate(1deg);
+}
+
+/* LAYOUT PAGE THE JENSEN */
+.page-grid{
+  width:100%;
+  max-width:1200px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+  gap:60px;
+  align-items:center;
+  z-index:2;
+}
+
+.card-desc h3 {
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+  color: var(--primary-neon);
+}
+
+.card-desc p {
+  margin-bottom: 15px;
+  line-height: 1.6;
+}
+
+.card-visual {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #111;
+  border-radius: 8px;
+  padding: 25px;
+}
+
+.vinyl-animation {
+  font-size: 5rem;
+}
+
+/* Animasi berputar ketika lagu di-play */
+.vinyl-animation.spinning {
+  animation: spin 2.5s linear infinite;
+}
+
+@keyframes spin {
+  100% { transform: rotate(360deg); }
+}
+
+.caption {
+  margin-top: 15px;
+  font-style: italic;
+  color: #777;
+}
+
+/* LAYOUT PLAYLIST & AUDIO VISUALIZER */
+.audio-player-container {
+  background: var(--card-bg);
+  border: 3px dashed var(--secondary-neon);
+  padding: 40px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.now-playing {
+  margin-bottom: 30px;
+}
+
+.now-playing h3 {
+  font-size: 1.2rem;
+  color: #aaa;
+  text-transform: uppercase;
+}
+
+.track-title-text {
+  font-size: 1.8rem;
+  color: var(--primary-neon);
+  font-weight: bold;
+}
+
+/* EFEK VISUALIZER (BAR NAIK TURUN) */
+.visualizer {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  height: 60px;
+  gap: 6px;
+  margin-bottom: 30px;
+  opacity: 0.2;
+}
+
+.visualizer.playing {
+  opacity: 1;
+}
+
+.bar {
+  width: 12px;
+  height: 12px;
+  background-color: var(--secondary-neon);
+  border-radius: 6px 6px 0 0;
+}
+
+.visualizer.playing .bar:nth-child(even) {
+  animation: bounce 0.4s ease-in-out infinite alternate;
+}
+.visualizer.playing .bar:nth-child(odd) {
+  animation: bounce 0.6s ease-in-out infinite alternate;
+}
+
+@keyframes bounce {
+  100% { height: 60px; background-color: var(--primary-neon); }
+}
+
+/* CONTROLLER MUSIC BUTTONS */
+.player-controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+}
+
+.player-btn {
+  padding: 12px 24px;
+  background: #111;
+  border: 2px solid var(--text-color);
+  color: #fff;
+  cursor: pointer;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: 0.2s;
+}
+
+.player-btn:hover {
+  background: var(--primary-neon);
+  border-color: var(--primary-neon);
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(255, 0, 85, 0.4);
+}
+
+.player-btn.stop-btn {
+  border-color: #ff3333;
+  color: #ff3333;
+}
+
+.player-btn.stop-btn:hover {
+  background: #ff3333;
+  color: #fff;
+  box-shadow: 0 5px 15px rgba(255, 51, 51, 0.4);
+}
+
+/* ABOUT ME BADGE DESIGN */
+.about-box {
+  background: #111;
+  border: 2px solid var(--primary-neon);
+  padding: 40px;
+  position: relative;
+  border-radius: 8px;
+  box-shadow: 8px 8px 0px var(--primary-neon);
+}
+
+.profile-badge {
+  position: absolute;
+  top: -18px;
+  right: 25px;
+  background: var(--secondary-neon);
+  color: #000;
+  font-weight: bold;
+  padding: 6px 18px;
+  font-family: 'Russo One', sans-serif;
+  transform: rotate(6deg);
+}
+
+.about-box h3 {
+  font-size: 2.2rem;
+  margin-bottom: 5px;
+}
+
+.sub-role {
+  color: var(--secondary-neon);
+  margin-bottom: 15px;
+  font-size: 1.1rem;
+}
+
+.neon-line {
+  border: none;
+  height: 2px;
+  background: var(--primary-neon);
+  margin-bottom: 20px;
+}
+
+.tkj-skills {
+  margin-top: 25px;
+}
+
+.tkj-skills span {
+  background: var(--card-bg);
+  padding: 6px 14px;
+  margin-right: 10px;
   border-radius: 4px;
-  color: var(--text-h);
+  font-size: 0.9rem;
+  display: inline-block;
+  border-bottom: 3px solid var(--secondary-neon);
 }
 
-code {
-  font-size: 15px;
-  line-height: 135%;
-  padding: 4px 8px;
-  background: var(--code-bg);
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 20px;
+  background: #000;
+  font-size: 0.9rem;
+  color: #555;
+  margin-top: auto;
+  border-top: 1px solid #222;
+}
+@media screen and (max-width: 768px) {
+  /* 1. Paksa semua konten mengikuti lebar layar */
+  .page-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100vw !important;
+    padding: 0 20px !important;
+  }
+
+  /* 2. Besarkan teks agar terbaca */
+  .glow-title {
+    font-size: 2.2rem !important;
+    line-height: 1.1 !important;
+    margin-top: 20px;
+  }
+
+  .desc-text {
+    font-size: 1rem !important; /* Jangan terlalu kecil */
+    line-height: 1.5 !important;
+  }
+
+  /* 3. Perbaiki ukuran frame gambar agar proporsional */
+  .studio-frame {
+    width: 100% !important;
+    height: 250px !important;
+    margin-bottom: 20px;
+  }
+
+  /* 4. Pastikan section tidak memotong konten */
+  section {
+    height: auto !important;
+    min-height: 90vh !important;
+    padding: 80px 20px 40px 20px !important;
+    display: block !important; /* Hilangkan flex agar konten tidak "terjepit" */
+  }
 }
